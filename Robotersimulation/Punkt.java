@@ -31,6 +31,14 @@ public class Punkt
     public void setY(int value){ y=value; }
     public void Ausgabe(){ System.out.println("Punkt: " + x + "|" + y); }
     public void bewegeUm(int dx, int dy){ x += dx; y += dy; }
+    public boolean isInRect(Rechteck R)
+    {
+        int x1 = R.getPosition().getX();
+        int y1 = R.getPosition().getY();
+        int a = R.getBreite();
+        int b = R.getHoehe();
+        return ( x >= x1 && x <= (x1+a) && y >= y1 && y <= (y1+b));
+    }
     public double gibAbstand(Punkt other)
     {
         return Math.sqrt(Math.pow(x-other.getX() ,2) + Math.pow(y-other.getY(), 2));

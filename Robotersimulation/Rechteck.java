@@ -8,7 +8,7 @@ import java.awt.Color;
  */
 public class Rechteck
 {
-    Punkt position = new Punkt();
+    Punkt Pos = new Punkt();
     int breite = 0;
     int hoehe = 0;
     String name = "";
@@ -26,26 +26,33 @@ public class Rechteck
     
     public void setPosition(Punkt pos)
     {
-        position.setX(pos.getX());
-        position.setY(pos.getY());
+        Pos.setX(pos.getX());
+        Pos.setY(pos.getY());
     }
     public void setBreite(int breite){ this.breite = Math.abs(breite); }
     public void setHoehe(int hoehe){ this.hoehe = Math.abs(hoehe); }
     public void setName(String name){ this.name = name; }
     public void setFarbe(Color farbe){ this.farbe = farbe; }
     
-    public Punkt getPosition(){ return position; }
+    public Punkt getPosition(){ return Pos; }
     public int getBreite(){ return breite; }
     public int getHoehe(){ return hoehe; }
     public String getName(){ return name; }
     public Color setFarbe(){ return farbe; }
     
-    public void bewegeUm(int dx, int dy){ position.bewegeUm(dx, dy); }
-    public void bewegeUm(Punkt Delta){ position.bewegeUm(Delta.getX(), Delta.getY()); }
+    public boolean ueberlappt(Rechteck R)
+    {
+        Punkt P1 = new Punkt(Pos.getX() + breite, Pos.getY());
+        Punkt P2 = new Punkt(Pos.getX() , Pos.getY() + hoehe);
+        Punkt P3 = new Punkt(Pos.getX() + breite, Pos.getY() + hoehe);
+        return (Pos.isInRect(R) || P1.isInRect(R) || P2.isInRect(R) || P3.isInRect(R));
+    }
+    public void bewegeUm(int dx, int dy){ Pos.bewegeUm(dx, dy); }
+    public void bewegeUm(Punkt Delta){ Pos.bewegeUm(Delta.getX(), Delta.getY()); }
     public void ausgabeAttribute()
     {
         System.out.println("Rechteck-"+name+"-:");
-        System.out.println("Pos:"+position.getX()+"|"+position.getY());
+        System.out.println("Pos:"+Pos.getX()+"|"+Pos.getY());
         System.out.println("Maße:"+breite+"x"+hoehe);
         System.out.println("Farbe(RGB):"+farbe.getRed()+","+farbe.getGreen()+","+farbe.getBlue());
     }    
