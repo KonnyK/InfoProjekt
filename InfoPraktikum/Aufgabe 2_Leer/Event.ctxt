@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Event
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Event.\r\n\ \r\n\ @author\ (Ihr\ Name)\ \r\n\ @version\ (eine\ Versionsnummer\ oder\ ein\ Datum)\r\n
+comment1.params=
+comment1.target=EventQueue\ getQueue()
+comment2.params=signal\ time\ newValue
+comment2.target=Event(Signal,\ int,\ boolean)
+comment3.params=
+comment3.target=void\ propagate()
+comment4.params=queue
+comment4.target=void\ setEventQueue(EventQueue)
+comment5.params=
+comment5.target=int\ getTime()
+comment6.params=amount
+comment6.target=void\ shortenTime(int)
+numComments=7

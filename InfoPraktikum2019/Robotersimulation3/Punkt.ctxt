@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Punkt
+comment1.params=
+comment1.target=Punkt()
+comment2.params=X\ Y
+comment2.target=Punkt(int,\ int)
+comment3.params=
+comment3.target=int\ getX()
+comment4.params=
+comment4.target=int\ getY()
+comment5.params=x
+comment5.target=void\ setX(int)
+comment6.params=y
+comment6.target=void\ setY(int)
+comment7.params=dx\ dy
+comment7.target=void\ bewegeUm(int,\ int)
+comment8.params=
+comment8.target=void\ ausgabeAttribute()
+comment9.params=andererPunkt
+comment9.target=double\ gibAbstandPunkt(Punkt)
+numComments=10

@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Event
+comment1.params=targetSignal\ startTime\ newValue
+comment1.target=Event(Signal,\ int,\ boolean)
+comment2.params=newQueue
+comment2.target=void\ setEventQueue(EventQueue)
+comment3.params=
+comment3.target=EventQueue\ getEventQueue()
+comment4.params=
+comment4.target=void\ propagate()
+comment5.params=
+comment5.target=int\ getStartTime()
+comment6.params=
+comment6.target=Signal\ getSignal()
+comment7.params=
+comment7.target=boolean\ getValue()
+comment8.params=e
+comment8.target=boolean\ equals(Event)
+comment9.params=
+comment9.target=java.lang.String\ feedback()
+numComments=10

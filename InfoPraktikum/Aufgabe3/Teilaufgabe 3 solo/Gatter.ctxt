@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Gatter
+comment0.text=\r\n\ Die\ abstrakte\ Klasse\ Gatter\ stellt\ die\ Superklasse\ f\u00FCr\ alle\ m\u00F6glichen\ Formen\r\n\ von\ Gattern\ zur\ Verf\u00FCgung.\r\n\ \r\n\ @author\ Nils-Team\r\n\ @version\ 1.02\ 17.06.06\r\n
+comment1.params=amount
+comment1.target=Gatter(int)
+comment2.params=amount\ delay
+comment2.target=Gatter(int,\ int)
+comment3.params=index\ signal
+comment3.target=void\ setInput(int,\ Signal)
+comment4.params=signal
+comment4.target=void\ setOutput(Signal)
+comment5.params=
+comment5.target=void\ refreshOutput()
+comment6.params=
+comment6.target=boolean\ getOutputValue()
+comment7.params=trueAmount
+comment7.target=boolean\ calculate(int)
+numComments=8

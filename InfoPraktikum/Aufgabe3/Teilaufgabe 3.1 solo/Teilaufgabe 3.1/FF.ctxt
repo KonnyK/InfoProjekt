@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=FF
+comment1.params=waitTime
+comment1.target=FF(int)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Unterklassen\ von\ Gatter\r\n\ 1.Konstruktor\:\ Anzahl\ der\ Eing\u00E4nge\r\n\ 2.Konstruktor\:\ \ Anzahl\ der\ Eing\u00E4nge,\ Zeit\ die\ das\ Gatter\ zum\ reagieren\ braucht\r\n
+comment2.params=input
+comment2.target=boolean\ calculate(boolean[])
+comment2.text=\r\n\ laut\ wahrheitstabelle\ kann\ man\ einfach\ nur\r\n\ den\ \ zweiten\ \ wert\ betrachten\r\n\ beim\ \ illegal\ state\ w\u00FCrden\ \ theoretisch\ Q\ und\ notQ\ true\ werden,\r\n\ das\ kann\ \ hier\ nicht\ realisiert\ werden,\ da\ nur\ Q\ zur\u00FCckgegeben\ \ wird\r\n
+numComments=3

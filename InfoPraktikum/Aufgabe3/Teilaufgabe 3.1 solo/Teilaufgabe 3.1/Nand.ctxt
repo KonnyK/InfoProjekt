@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Nand
+comment1.params=anzEin
+comment1.target=Nand(int)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ UNterklassen\ von\ Gatter\r\n\ 1.Konstruktor\:\ Anzahl\ der\ Eing\u00E4nge\r\n\ 2.Konstruktor\:\ \ Anzahl\ der\ Eing\u00E4nge,\ Zeit\ die\ das\ Gatter\ zum\ reagieren\ braucht\r\n
+comment2.params=anzEin\ waitTime
+comment2.target=Nand(int,\ int)
+comment3.params=input
+comment3.target=boolean\ calculate(boolean[])
+numComments=4

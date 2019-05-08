@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Latch
+comment1.params=waitTime
+comment1.target=Latch(int)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Unterklassen\ von\ Gatter\r\n\ 1.Konstruktor\:\ Anzahl\ der\ Eing\u00E4nge\r\n\ 2.Konstruktor\:\ \ Anzahl\ der\ Eing\u00E4nge,\ Zeit\ die\ das\ Gatter\ zum\ reagieren\ braucht\r\n
+comment2.params=input
+comment2.target=boolean\ calculate(boolean[])
+numComments=3

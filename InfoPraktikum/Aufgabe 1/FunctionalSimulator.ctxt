@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=FunctionalSimulator
+comment0.text=\r\n\ Klasse\ FunctionalSimulator\ ist\ ein\ einfacher\ Logiksimulator,\ der\ nur\ \r\n\ Nand-Gatter\ simulieren\ kann\ und\ keine\ Zeitverz\u00F6gerungen\ ber\u00FCcksichtigt.\r\n\ Die\ zu\ simulierende\ Schaltung\ wird\ im\ Konstruktor\ der\ Klasse\ erzeugt.\r\n\ Es\ handelt\ sich\ hierbei\ um\ einen\ einfachen\ Volladdierer.\r\n\ //\ Zum\ Testen\ Ihrer\ Klassen\ <CODE>Nand</CODE>\ und\ <CODE>Signal</CODE>\ m\u00FCssen\ Sie\r\n\ einfach\ nur\ eine\ Instanz\ dieser\ Klasse\ erzeugen\ und\ dann\ die\ Methode\r\n\ //\ <CODE>simulate()</CODE>\ aufrufen.\r\n\ //\ @author\ Christian\ Hochberger,\ TU\ Dresden\r\n\ //\ @version\ 1.0\ Erste\ Fassung\r\n
+comment1.params=
+comment1.target=void\ PropagateSignals()
+comment2.params=
+comment2.target=FunctionalSimulator()
+comment3.params=
+comment3.target=void\ simulate()
+comment4.params=args
+comment4.target=void\ main(java.lang.String[])
+numComments=5

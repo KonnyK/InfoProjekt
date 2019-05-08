@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=EventQueue
+comment1.params=
+comment1.target=EventQueue()
+comment2.params=
+comment2.target=boolean\ hasMore()
+comment3.params=
+comment3.target=Event\ getFirst()
+comment4.params=newEvent
+comment4.target=void\ add(Event)
+comment5.params=
+comment5.target=void\ printevents()
+numComments=6

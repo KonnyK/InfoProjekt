@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Nand
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Nand\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=InputLength\ delayTime
+comment1.target=Nand(int,\ int)
+comment2.params=newOutput
+comment2.target=void\ setOutput(Signal)
+comment3.params=Index\ newInput
+comment3.target=void\ setInput(int,\ Signal)
+comment4.params=
+comment4.target=void\ RefreshOutput()
+comment5.params=
+comment5.target=void\ instantRefresh()
+numComments=6

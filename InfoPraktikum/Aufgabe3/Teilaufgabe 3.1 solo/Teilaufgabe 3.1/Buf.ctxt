@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Buf
+comment1.params=waitTime
+comment1.target=Buf(int)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Unterklassen\ von\ Gatter\r\n\ 1.Konstruktor\:\ Anzahl\ der\ Eing\u00E4nge\r\n\ 2.Konstruktor\:\ \ Anzahl\ der\ Eing\u00E4nge,\ Zeit\ die\ das\ Gatter\ zum\ reagieren\ braucht\r\n
+comment2.params=input
+comment2.target=boolean\ calculate(boolean[])
+comment2.text=\r\n\ gibt\ den\ \ Eingangswert\ zur\u00FCck\r\n\ bei\ mehreren\ \ Eing\u00E4ngen\ \ wird\ der\ Durchschnitt\ gebildet\r\n\ gleiche\ ANzahl\ an\ \ true\ &\ false\ wird\ als\ false\ interpretiert\r\n\ um\ das\ zu\ \u00E4ndern\:\ >\ zu\ >\=\ \u00E4ndern\r\n
+numComments=3
