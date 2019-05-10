@@ -11,7 +11,7 @@ public class Spielfeld
 {
     final int breite = 1000;
     final int hoehe = 1000;
-    Punkt[] Punkte = new Punkt[0];
+    ArrayList<Punkt> Punkte = new ArrayList<Punkt>();
     Random RGen = new Random();
     ArrayList<Rechteck> Hindernisse = new ArrayList<Rechteck>();
     
@@ -30,51 +30,63 @@ public class Spielfeld
         boolean EingabeKorrekt = false;
         while (true)
         {
+            String Eingabe = Scan.next();
             try
             {
-                Anzahl = Scan.nextInt();
+                Anzahl = Integer.valueOf(Eingabe);
                 if (Anzahl < 0) System.out.println("Bitte geben Sie eine Zahl größer null ein.");
                 EingabeKorrekt = (Anzahl > 0);
                 break;
             }
             catch (Exception E)
             { 
-                System.out.println("Geben Sie bitte eine passende Zahl ein?");
+                if (Eingabe.contains("stop")) 
+                {
+                    Scan.close();
+                    EingabeKorrekt = true;
+                    Anzahl = 0;
+                }
+                else 
+                {
+                    System.out.println("Geben Sie bitte eine passende Zahl ein?");
+                }
                 break;
             }                    
         }
         if (!EingabeKorrekt) return getAnzahlEingabe(Message);
         else return Anzahl;
     }
-    
-    public Punkt[] PunktEingabe()
+
+    public ArrayList<Punkt> PunktEingabe()
     {
         Scanner Scan = new Scanner(System.in);
         int Anzahl = getAnzahlEingabe("Wieviele Punkte sollen abgefahren werden?");
         boolean PunktErkannt = false;
+        Punkte.clear();
+        
+        if (Anzahl == 0) return Punkte;
         
         System.out.println("Erstelle " + Anzahl + " Punkte...");
-        Punkte = new Punkt[Anzahl+1];
-        Punkte[0] = new Punkt();
-        for(int i = 1; i < Punkte.length; i++)
+        Punkte.add(new Punkt());
+        
+        for(int i = 1; i <= Anzahl; i++)
         {
-            System.out.println("Geben die Koordinaten des " + i + "ten Punktes ein!");
+            System.out.println("Geben Sie die Koordinaten des " + i + "ten Punktes ein!");
             System.out.println("Format:x,y");
             PunktErkannt = false;
             while (!PunktErkannt)
             {
                 String Eingabe = Scan.next();
-                String[] Koordinaten = Eingabe.split(",",3);
+                if (Eingabe.contains("stop")) return Punkte;
                 
+                String[] Koordinaten = Eingabe.split(",",3);
                 try
                 {
                     int x = Integer.valueOf(Koordinaten[0]);
                     int y = Integer.valueOf(Koordinaten[1]);
                     if (x >= 0 && x <= breite && y >= 0 && y <= hoehe)
                     {
-                        Punkte[i] = new Punkt();
-                        Punkte[i].setX(x);
-                        Punkte[i].setY(y); 
+                        Punkte.add(new Punkt(x,y));
                         PunktErkannt = true;
                     } else System.out.println("Punkt liegt nicht im Spielfeld(X:0..."+breite+" Y:=..."+hoehe);
                 }
@@ -88,37 +100,44 @@ public class Spielfeld
     }
     
     public void poiSortieren()
+    ///vergleicht für jeden Punkt Ob der Abstand zu Punkte[0] größer ist als der des Vorgängers. Wenn nicht werden die beiden getauscht.
     {
-        boolean Fertig = false;
-        while (!Fertig)
+        boolean InOrdnung = false;
+        while (!InOrdnung)
         {
-            Fertig = true;
-            for (int i = 1; i < Punkte.length; i++)
+            InOrdnung = true;
+            for (int i = 1; i < Punkte.size(); i++)
             { 
-                if (Punkte[i].gibAbstand(Punkte[0]) < Punkte[i-1].gibAbstand(Punkte[0]))
+                if (Punkte.get(i).gibAbstand(Punkte.get(0)) < Punkte.get(i).gibAbstand(Punkte.get(0)))
                 {
-                    Punkt P = new Punkt(Punkte[i].getX(), Punkte[i].getY());
-                    Punkte[i] = Punkte[i-1];
-                    Punkte[i-1] = P;
-                    Fertig = false;
+                    Punkt Zwischenablage = new Punkt(Punkte.get(i).getX(), Punkte.get(i).getY());
+                    Punkte.get(i).setX(Punkte.get(i-1).getX());
+                    Punkte.get(i).setY(Punkte.get(i-1).getY());
+                    Punkte.get(i-1).setX(Zwischenablage.getX());
+                    Punkte.get(i-1).setY(Zwischenablage.getY());
+                    InOrdnung = false;
                 }
             }   
         }
     }
     
     public void hindernisseErzeugen()
+    ///fragt ab wieviele Hindernisse erzeugt werden sollen und testet für jedes ob es im Spielfeld liegt
     {
         for (int i = 0; i < getAnzahlEingabe("Wieviele Hindernisse soll es geben?"); i++)
         {
-            boolean RectInSpielfeld = false;
+            boolean Overlap = true;
             Rechteck Spielfeld = new Rechteck(new Punkt(), breite, hoehe,"" ,Color.BLACK);
             Punkt P1 = new Punkt();
             Punkt P2 = new Punkt();
-            while (!RectInSpielfeld)
+            
+            while (Overlap)
             {
+                Overlap = false;
                 P1 = new Punkt(RNum(0, breite), RNum(0,hoehe));
                 P2 = new Punkt(RNum(0, breite), RNum(0,hoehe));
-                RectInSpielfeld = (P1.isInRect(Spielfeld) && P2.isInRect(Spielfeld));
+                for (Rechteck R : Hindernisse) if (P1.isInRect(R) || P2.isInRect(R)) Overlap = true;
+ 
             }
             Punkt Pos = new Punkt(Math.min(P1.getX(), P2.getX()), Math.min(P1.getY(), P2.getY()));
             Punkt Maße = new Punkt(Math.max(P1.getX(), P2.getX()), Math.max(P1.getY(), P2.getY()));

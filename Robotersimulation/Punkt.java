@@ -29,7 +29,7 @@ public class Punkt
     public int getY(){ return y; }
     public void setX(int value){ x=value; }
     public void setY(int value){ y=value; }
-    public void Ausgabe(){ System.out.println("Punkt: " + x + "|" + y); }
+    public String Ausgabe(){ return ("Punkt: " + x + "|" + y); }
     public void bewegeUm(int dx, int dy){ x += dx; y += dy; }
     public boolean isInRect(Rechteck R)
     {
