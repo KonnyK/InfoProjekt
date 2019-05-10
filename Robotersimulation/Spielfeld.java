@@ -28,6 +28,7 @@ public class Spielfeld
         System.out.println(Message);
         int Anzahl = 0;
         boolean EingabeKorrekt = false;
+           
         while (true)
         {
             String Eingabe = Scan.next();
@@ -102,13 +103,26 @@ public class Spielfeld
     public void poiSortieren()
     ///vergleicht für jeden Punkt Ob der Abstand zu Punkte[0] größer ist als der des Vorgängers. Wenn nicht werden die beiden getauscht.
     {
+        Punkte.sort(new Comparator<Punkt>()
+        {
+            @Override 
+            public int compare(Punkt P1, Punkt P2)
+            {
+                long Abstand1 = Math.round(P1.gibAbstand(Punkte.get(0)));
+                long Abstand2 = Math.round(P2.gibAbstand(Punkte.get(0)));
+                return Math.toIntExact(Abstand1-Abstand2);
+            }
+        });
+            
+        
+        /*
         boolean InOrdnung = false;
         while (!InOrdnung)
         {
             InOrdnung = true;
             for (int i = 1; i < Punkte.size(); i++)
             { 
-                if (Punkte.get(i).gibAbstand(Punkte.get(0)) < Punkte.get(i).gibAbstand(Punkte.get(0)))
+                if (Punkte.get(i).gibAbstand(Punkte.get(0)) < Punkte.get(i-1).gibAbstand(Punkte.get(0)))
                 {
                     Punkt Zwischenablage = new Punkt(Punkte.get(i).getX(), Punkte.get(i).getY());
                     Punkte.get(i).setX(Punkte.get(i-1).getX());
@@ -117,8 +131,8 @@ public class Spielfeld
                     Punkte.get(i-1).setY(Zwischenablage.getY());
                     InOrdnung = false;
                 }
-            }   
-        }
+            }  
+        } */
     }
     
     public void hindernisseErzeugen()
