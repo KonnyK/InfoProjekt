@@ -150,23 +150,23 @@ public class Spielfeld
     {
         for (int i = 0; i < getAnzahlEingabe("Wieviele Hindernisse soll es geben?"); i++)
         {
-            boolean Overlap = true;
             Rechteck Spielfeld = new Rechteck(new Punkt(), breite, hoehe,"" ,Color.BLACK);
-            Punkt P1 = new Punkt();
-            Punkt P2 = new Punkt();
-            
-            while (Overlap)
+
+            while (true)
             {
-                Overlap = false;
-                P1 = new Punkt(RNum(0, breite), RNum(0,hoehe));
-                P2 = new Punkt(RNum(0, breite), RNum(0,hoehe));
-                for (Rechteck R : Hindernisse) if (P1.isInRect(R) || P2.isInRect(R)) Overlap = true;
- 
-            }
-            Punkt Pos = new Punkt(Math.min(P1.getX(), P2.getX()), Math.min(P1.getY(), P2.getY()));
-            Punkt Maße = new Punkt(Math.max(P1.getX(), P2.getX()), Math.max(P1.getY(), P2.getY()));
-            Hindernisse.add(new Rechteck(Pos, Maße.getX(), Maße.getY(), "Rechteck " + i, RCol()));
-            
+                Punkt P1 = new Punkt(RNum(0, breite), RNum(0,hoehe));
+                Punkt P2 = new Punkt(RNum(0, breite), RNum(0,hoehe));
+                Punkt Pos = new Punkt(Math.min(P1.getX(), P2.getX()), Math.min(P1.getY(), P2.getY()));
+                Punkt Maße = new Punkt( Math.max(P1.getX(),P2.getX()) - Pos.getX(), Math.max(P1.getY(),P2.getY()) - Pos.getY());
+                Rechteck Neu = new Rechteck(Pos, Maße.getX(), Maße.getY(), "Rechteck " + i, RCol());
+                boolean Overlap = false;
+                for (Rechteck R : Hindernisse) if (!Neu.ueberlappt(R)) Overlap = true;
+                if (!Overlap)
+                {
+                    Hindernisse.add(Neu);
+                    break;
+                }
+            }            
         }
     }
 }
