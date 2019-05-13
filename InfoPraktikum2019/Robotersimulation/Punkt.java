@@ -29,12 +29,14 @@ public class Punkt
     public int getY(){ return y; }
     public void setX(int value){ x=value; }
     public void setY(int value){ y=value; }
+    public void addX(int value){ x+=value; }
+    public void addY(int value){ y+=value; }
     public String Ausgabe(){ return ("Punkt: " + x + "|" + y); }
     public void bewegeUm(int dx, int dy){ x += dx; y += dy; }
     public boolean isInRect(Rechteck R)
     {
-        int x1 = R.getPosition().getX();
-        int y1 = R.getPosition().getY();
+        int x1 = R.getPos().getX();
+        int y1 = R.getPos().getY();
         int a = R.getBreite();
         int b = R.getHoehe();
         return ( x >= x1 && x <= (x1+a) && y >= y1 && y <= (y1+b));
