@@ -100,20 +100,30 @@ public class Spielfeld
         return Punkte;
     }
     
-    public void poiSortieren()
+    public void poiSortieren(ArrayList<Punkt> POI)
     ///vergleicht für jeden Punkt Ob der Abstand zu Punkte[0] größer ist als der des Vorgängers. Wenn nicht werden die beiden getauscht.
     {
-        Punkte.sort(new Comparator<Punkt>()
+        POI.sort(new Comparator<Punkt>()
         {
             @Override 
             public int compare(Punkt P1, Punkt P2)
             {
-                long Abstand1 = Math.round(P1.gibAbstand(Punkte.get(0)));
-                long Abstand2 = Math.round(P2.gibAbstand(Punkte.get(0)));
+                long Abstand1 = Math.round(100*P1.gibAbstand(POI.get(0)));
+                long Abstand2 = Math.round(100*P2.gibAbstand(POI.get(0)));
                 return Math.toIntExact(Abstand1-Abstand2);
             }
         });
-            
+        System.out.println("Sortiere Punkte...");
+        double Gesamtweg = 0;
+        for (int i = 1; i < POI.size(); i++)
+        {
+            double Abstand = POI.get(i-1).gibAbstand(POI.get(i)); 
+            Gesamtweg += Abstand;
+            String P1 = "Punkt" + (i-1) + "(" + POI.get(i-1).getX() + "|" + POI.get(i-1).getY() + ")";
+            String P2 = "Punkt" + i + "(" + POI.get(i-1).getX() + "|" + POI.get(i-1).getY() + ")";
+            System.out.println(i + ".Teilstrecke: " + P1 + " --> " + P2 + " : " + (double)Math.round(100*Abstand)/100 + "px");
+        }
+        System.out.println("Gesamte Strecke: " + (double)Math.round(100*Gesamtweg)/100 + "px");
         
         /*
         boolean InOrdnung = false;
