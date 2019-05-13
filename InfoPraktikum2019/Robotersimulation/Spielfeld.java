@@ -148,10 +148,10 @@ public class Spielfeld
     public void hindernisseErzeugen()
     ///fragt ab wieviele Hindernisse erzeugt werden sollen und testet für jedes ob es im Spielfeld liegt
     {
-        for (int i = 0; i < getAnzahlEingabe("Wieviele Hindernisse soll es geben?"); i++)
+        Hindernisse.clear();
+        int Anzahl = getAnzahlEingabe("Wieviele Hindernisse soll es geben?");
+        for (int i = 0; i < Anzahl; i++)
         {
-            Rechteck Spielfeld = new Rechteck(new Punkt(), breite, hoehe,"" ,Color.BLACK);
-
             while (true)
             {
                 Punkt P1 = new Punkt(RNum(0, breite), RNum(0,hoehe));
@@ -160,7 +160,7 @@ public class Spielfeld
                 Punkt Maße = new Punkt( Math.max(P1.getX(),P2.getX()) - Pos.getX(), Math.max(P1.getY(),P2.getY()) - Pos.getY());
                 Rechteck Neu = new Rechteck(Pos, Maße.getX(), Maße.getY(), "Rechteck " + i, RCol());
                 boolean Overlap = false;
-                for (Rechteck R : Hindernisse) if (!Neu.ueberlappt(R)) Overlap = true;
+                for (Rechteck R : Hindernisse) if (Neu.ueberlappt(R)) Overlap = true;
                 if (!Overlap)
                 {
                     Hindernisse.add(Neu);
@@ -168,5 +168,14 @@ public class Spielfeld
                 }
             }            
         }
+        int Area = 0;
+        for (int i = 0; i< Hindernisse.size(); i++) 
+        {
+            Rechteck R = Hindernisse.get(i);
+            int SubArea = R.getBreite() * R.getHoehe();
+            System.out.println("Rechteck" + i + ": " + (double) SubArea/10000 + "% Fläche");
+            Area += SubArea;
+        }
+        System.out.println("Insgesamt " + (double) Area/10000 + "% Flächennutzung");
     }
 }

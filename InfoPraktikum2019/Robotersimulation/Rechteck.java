@@ -40,13 +40,56 @@ public class Rechteck
     public String getName(){ return name; }
     public Color setFarbe(){ return farbe; }
     
+    private boolean LinesIntersect(Punkt[] P)
+    {
+        if (P.length != 4) return true;
+        boolean Y = (P[2].getY() <= P[0].getY() && P[0].getY() <= P[3].getY());
+        boolean X = (P[0].getX() <= P[2].getX() && P[2].getX() <= P[1].getX());        
+        return (X && Y);
+    }
+    
     public boolean ueberlappt(Rechteck R)
     {
+        boolean Intersect = false;
         if (breite * hoehe > R.getBreite() * R.getHoehe()) return R.ueberlappt(this);
-        Punkt P1 = new Punkt(Pos.getX() + breite, Pos.getY());
+        Punkt[] R1 = new Punkt[]
+        { 
+            new Punkt(Pos.getX(), Pos.getY() + hoehe),
+            new Punkt(Pos.getX(), Pos.getY())
+        };
+        for (int i = 0; i < 4; i++)
+        {
+            R1 = new Punkt[]
+            {
+                new Punkt(R1[0].getX() + breite*((2-i)%2), R1[0].getY() + hoehe*((i-1)%2)),
+                new Punkt(R1[1].getX() + breite*((1-i)%2), R1[1].getY() + hoehe*((2-i)%2))
+            };
+            Punkt[] R2 = new Punkt[]
+            { 
+                new Punkt(R.getPosition().getX(),R.getPosition().getY() + R.getHoehe()),
+                new Punkt(R.getPosition().getX(), R.getPosition().getY())
+            };
+            for (int j = 0; j < 4; j++)
+            {
+                R2 = new Punkt[]
+                {
+                    new Punkt(R2[0].getX() + R.getBreite()*((2-j)%2), R2[0].getY() + R.getHoehe()*((j-1)%2)),
+                    new Punkt(R2[1].getX() + R.getBreite()*((1-j)%2), R2[1].getY() + R.getHoehe()*((2-j)%2))
+                };
+                Punkt P1 = new Punkt(Math.min(R1[0].getX(), R1[1].getX()), Math.min(R1[0].getY(), R1[1].getY()));
+                Punkt P2 = new Punkt(Math.max(R1[0].getX(), R1[1].getX()), Math.max(R1[0].getY(), R1[1].getY()));
+                Punkt P3 = new Punkt(Math.min(R2[0].getX(), R2[1].getX()), Math.min(R2[0].getY(), R2[1].getY()));
+                Punkt P4 = new Punkt(Math.max(R2[0].getX(), R2[1].getX()), Math.max(R2[0].getY(), R2[1].getY()));                
+                if (LinesIntersect(new Punkt[] { P1, P2, P3, P4 })) return true;
+            }
+        }
+        if (Pos.isInRect(R)) return true;
+        return false;
+        /*Punkt P1 = new Punkt(Pos.getX() + breite, Pos.getY());
         Punkt P2 = new Punkt(Pos.getX() , Pos.getY() + hoehe);
         Punkt P3 = new Punkt(Pos.getX() + breite, Pos.getY() + hoehe);
         return (Pos.isInRect(R) || P1.isInRect(R) || P2.isInRect(R) || P3.isInRect(R));
+        */
     }
     public void bewegeUm(int dx, int dy){ Pos.bewegeUm(dx, dy); }
     public void bewegeUm(Punkt Delta){ Pos.bewegeUm(Delta.getX(), Delta.getY()); }
@@ -58,3 +101,4 @@ public class Rechteck
         System.out.println("Farbe(RGB):"+farbe.getRed()+","+farbe.getGreen()+","+farbe.getBlue());
     }    
 }
+
