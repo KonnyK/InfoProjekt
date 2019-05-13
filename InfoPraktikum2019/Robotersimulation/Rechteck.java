@@ -42,6 +42,7 @@ public class Rechteck
     
     public boolean ueberlappt(Rechteck R)
     {
+        if (breite * hoehe > R.getBreite() * R.getHoehe()) return R.ueberlappt(this);
         Punkt P1 = new Punkt(Pos.getX() + breite, Pos.getY());
         Punkt P2 = new Punkt(Pos.getX() , Pos.getY() + hoehe);
         Punkt P3 = new Punkt(Pos.getX() + breite, Pos.getY() + hoehe);
