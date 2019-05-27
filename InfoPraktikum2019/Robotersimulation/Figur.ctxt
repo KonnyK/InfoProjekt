@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=Figur
+comment1.params=
+comment1.target=Figur()
+comment10.params=
+comment10.target=int\ maxX()
+comment11.params=
+comment11.target=int\ minY()
+comment12.params=
+comment12.target=int\ maxY()
+comment2.params=pos
+comment2.target=void\ setPos(Punkt)
+comment3.params=farbe
+comment3.target=void\ setFarbe(java.awt.Color)
+comment4.params=
+comment4.target=Punkt\ getPos()
+comment5.params=
+comment5.target=java.awt.Color\ getFarbe()
+comment6.params=R
+comment6.target=boolean\ ueberlappt(Rechteck)
+comment7.params=dx\ dy
+comment7.target=void\ bewegeUm(int,\ int)
+comment8.params=Delta
+comment8.target=void\ bewegeUm(Punkt)
+comment9.params=
+comment9.target=int\ minX()
+numComments=13

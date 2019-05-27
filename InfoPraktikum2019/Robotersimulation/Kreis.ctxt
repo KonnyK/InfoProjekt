@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Kreis
+comment1.params=
+comment1.target=int\ minX()
+comment2.params=
+comment2.target=int\ maxX()
+comment3.params=
+comment3.target=int\ minY()
+comment4.params=
+comment4.target=int\ maxY()
+comment5.params=
+comment5.target=Kreis()
+comment6.params=R
+comment6.target=boolean\ ueberlappt(Rechteck)
+numComments=7
