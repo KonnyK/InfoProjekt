@@ -14,8 +14,12 @@ public class Spielfeld
     ArrayList<Punkt> Punkte = new ArrayList<Punkt>();
     Random RGen = new Random();
     ArrayList<Rechteck> Hindernisse = new ArrayList<Rechteck>();
+    Leinwand leinwand;
     
-    public Spielfeld(){}
+    public Spielfeld()
+    {
+        leinwand = new Leinwand(breite, hoehe, Color.pink);
+    }
     
     private int RNum(int von, int bis){ return (RGen.nextInt(bis-von) + von); }
     
@@ -145,6 +149,11 @@ public class Spielfeld
         } */
     }
     
+    private void zeichnen(ArrayList<Rechteck> Hindis)
+    {
+        leinwand.zeichne(Hindis);
+    }
+    
     public void hindernisseErzeugen()
     ///fragt ab wieviele Hindernisse erzeugt werden sollen und testet für jedes ob es im Spielfeld liegt
     {
@@ -177,5 +186,6 @@ public class Spielfeld
             Area += SubArea;
         }
         System.out.println("Insgesamt " + (double) Area/10000 + "% Flächennutzung");
+        zeichnen(Hindernisse);
     }
 }

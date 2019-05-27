@@ -17,19 +17,34 @@ public class Leinwand
     Color hintergrundfarbe = Color.BLACK;
     Zeichenflaeche Canvas = new Zeichenflaeche();
     
-    public Leinwand(int breite, int hoehe, ArrayList<Rechteck> Hindernisse)
+    public Leinwand(int breite, int hoehe, Color hintergrundfarbe)
     {
         this.breite = breite;
         this.hoehe = hoehe;
-        Color hintergrundfarbe = Color.blue;
         this.hintergrundfarbe = hintergrundfarbe;
-        
-        Canvas.ZuZeichnen = Hindernisse;
-        
+        fenster.setContentPane(Canvas);
         fenster.setSize(breite, hoehe);
-        fenster.setBackground(hintergrundfarbe);
-        fenster.add(Canvas);
-        fenster.setVisible(true);
+
+       
     };
+    
+    public void zeichne(ArrayList<Rechteck> hindernisse)
+    {
+        fenster.setVisible(true);
+        Canvas.ZuZeichnen = hindernisse;
+        Canvas.Hintergrund = new Rechteck(new Punkt(), breite, hoehe, "", hintergrundfarbe);
+    }
+    
+    private void warten(int millisekunden)
+    {
+        try
+        {  
+            Thread.sleep(millisekunden);
+        }
+        catch (Exception E)
+        {
+            
+        }
+    }
     
 }

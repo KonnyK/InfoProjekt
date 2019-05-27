@@ -13,11 +13,14 @@ public class Zeichenflaeche extends JPanel
 {
     
     public ArrayList<Rechteck> ZuZeichnen = new ArrayList<Rechteck>();
+    public Rechteck Hintergrund;
     
     @Override
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        g.setColor(Hintergrund.getFarbe());
+        g.fillRect(Hintergrund.getPos().getX(), Hintergrund.getPos().getY(), Hintergrund.getBreite(), Hintergrund.getHoehe());
         for (Rechteck R : ZuZeichnen)
         {
             g.setColor(R.getFarbe());
@@ -26,7 +29,7 @@ public class Zeichenflaeche extends JPanel
         g.setColor(Color.black);
         for (Rechteck R : ZuZeichnen)
         {
-            g.drawString(Integer.toString(ZuZeichnen.indexOf(R)), R.Pos.getX(), R.Pos.getY());
+            g.drawString(Integer.toString(ZuZeichnen.indexOf(R)), R.getPos().getX(), R.getPos().getY());
         }
     }
     

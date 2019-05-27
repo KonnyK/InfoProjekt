@@ -8,11 +8,11 @@ import java.awt.Color;
  */
 public class Rechteck
 {
-    Punkt Pos = new Punkt();
-    int breite = 0;
-    int hoehe = 0;
-    String name = "";
-    Color farbe = Color.black;
+    private Punkt Pos = new Punkt();
+    private int breite = 0;
+    private int hoehe = 0;
+    private String name = "";
+    private Color farbe = Color.black;
     
     public Rechteck(){}
     public Rechteck(Punkt pos, int breite, int hoehe, String name, Color farbe)
