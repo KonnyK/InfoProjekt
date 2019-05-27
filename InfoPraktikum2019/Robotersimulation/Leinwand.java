@@ -24,18 +24,27 @@ public class Leinwand
         this.hintergrundfarbe = hintergrundfarbe;
         fenster.setContentPane(Canvas);
         fenster.setSize(breite, hoehe);
-
-       
+        Canvas.Hintergrund = new Rechteck(new Punkt(), breite, hoehe, "", hintergrundfarbe);    
     };
     
-    public void zeichne(ArrayList<Rechteck> hindernisse)
+    public void zeichne(ArrayList<Figur> hindernisse)
     {
         fenster.setVisible(true);
-        Canvas.ZuZeichnen = hindernisse;
-        Canvas.Hintergrund = new Rechteck(new Punkt(), breite, hoehe, "", hintergrundfarbe);
+        Canvas.ZuZeichnen.clear();
+        for (Figur F : hindernisse)
+        {
+            wait(1);
+            Canvas.ZuZeichnen.add(F);
+        }
     }
     
-    private void warten(int millisekunden)
+    public void zeichne(Figur F)
+    {
+        fenster.setVisible(true);
+        if (!Canvas.ZuZeichnen.contains(F)) Canvas.ZuZeichnen.add(F);    
+    }
+    
+    private void wait(int millisekunden)
     {
         try
         {  

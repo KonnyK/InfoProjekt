@@ -12,7 +12,7 @@ import javax.swing.*;
 public class Zeichenflaeche extends JPanel
 {
     
-    public ArrayList<Rechteck> ZuZeichnen = new ArrayList<Rechteck>();
+    public ArrayList<Figur> ZuZeichnen = new ArrayList<Figur>();
     public Rechteck Hintergrund;
     
     @Override
@@ -21,15 +21,24 @@ public class Zeichenflaeche extends JPanel
         super.paintComponent(g);
         g.setColor(Hintergrund.getFarbe());
         g.fillRect(Hintergrund.getPos().getX(), Hintergrund.getPos().getY(), Hintergrund.getBreite(), Hintergrund.getHoehe());
-        for (Rechteck R : ZuZeichnen)
+        for (Figur F : ZuZeichnen)
         {
-            g.setColor(R.getFarbe());
-            g.fillRect(R.getPos().getX(), R.getPos().getY(), R.getBreite(), R.getHoehe());
+            g.setColor(F.getFarbe());
+            if (F.getClass() == new Rechteck().getClass()) 
+            {
+                Rechteck R = (Rechteck) F;
+                g.fillRect(R.getPos().getX(), R.getPos().getY(), R.getBreite(), R.getHoehe());
+            }
+            if (F.getClass() == new Kreis().getClass()) 
+            {
+                Kreis K = (Kreis) F;
+                g.fillArc(K.getPos().getX()+K.getRadius(), K.getPos().getY()+K.getRadius(), K.getRadius(), K.getRadius(), 0, 360);
+            }
         }
         g.setColor(Color.black);
-        for (Rechteck R : ZuZeichnen)
+        for (Figur R : ZuZeichnen)
         {
-            g.drawString(Integer.toString(ZuZeichnen.indexOf(R)), R.getPos().getX(), R.getPos().getY());
+            if (R.getClass() == new Rechteck().getClass()) g.drawString(Integer.toString(ZuZeichnen.indexOf(R)), R.getPos().getX(), R.getPos().getY());
         }
     }
     

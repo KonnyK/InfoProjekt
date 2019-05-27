@@ -10,6 +10,9 @@ public class Kreis extends Figur
 {
     private int radius = 0;
     
+    public int getRadius(){return radius;}
+    public void setRadius(int value){radius = value;}
+    
     @Override
     public int minX(){return getPos().getX();}
     @Override

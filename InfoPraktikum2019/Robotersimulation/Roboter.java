@@ -8,7 +8,7 @@
 import java.util.*;
 import java.lang.*;
 
-public class Roboter
+public class Roboter extends Kreis
 {
     private enum Stichwort
     {
