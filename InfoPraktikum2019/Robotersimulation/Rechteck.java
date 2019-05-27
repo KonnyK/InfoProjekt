@@ -50,6 +50,12 @@ public class Rechteck
     
     public boolean ueberlappt(Rechteck R)
     {
+        Punkt M1 = new Punkt(getPos().getX() + getBreite()/2, getPos().getY() + getHoehe()/2);
+        Punkt M2 = new Punkt(R.getPos().getX() + R.getBreite()/2, R.getPos().getY() + R.getHoehe()/2);
+        boolean X = Math.abs(M2.getX() - M1.getX()) <= (getBreite() + R.getBreite())/2;
+        boolean Y = Math.abs(M2.getY() - M1.getY()) <= (getHoehe() + R.getHoehe())/2;
+        return (X && Y);
+        /*
         boolean Intersect = false;
         if (breite * hoehe > R.getBreite() * R.getHoehe()) return R.ueberlappt(this);
         Punkt[] R1 = new Punkt[]
@@ -59,15 +65,17 @@ public class Rechteck
         };
         for (int i = 0; i < 4; i++)
         {
+            
+            
             R1[0].addX(breite*((2-i)%2));
             R1[0].addY(hoehe*((i-1)%2));
             R1[1].addX(breite*((1-i)%2));
             R1[1].addY(hoehe*((2-i)%2));
-            /*R1 = new Punkt[]
+            R1 = new Punkt[]
             {
                 new Punkt(R1[0].getX() + breite*((2-i)%2), R1[0].getY() + hoehe*((i-1)%2)),
                 new Punkt(R1[1].getX() + breite*((1-i)%2), R1[1].getY() + hoehe*((2-i)%2))
-            };*/
+            };
             Punkt[] R2 = new Punkt[]
             { 
                 new Punkt(R.getPos().getX(),R.getPos().getY() + R.getHoehe()),
@@ -79,11 +87,11 @@ public class Rechteck
                 R2[0].addY(R.getHoehe()*((i-1)%2));
                 R2[1].addX(R.getBreite()*((1-i)%2));
                 R2[1].addY(R.getHoehe()*((2-i)%2));
-                /*R2 = new Punkt[]
+                R2 = new Punkt[]
                 {
                     new Punkt(R2[0].getX() + R.getBreite()*((2-j)%2), R2[0].getY() + R.getHoehe()*((j-1)%2)),
                     new Punkt(R2[1].getX() + R.getBreite()*((1-j)%2), R2[1].getY() + R.getHoehe()*((2-j)%2))
-                };*/
+                };
                 Punkt P1 = new Punkt(Math.min(R1[0].getX(), R1[1].getX()), Math.min(R1[0].getY(), R1[1].getY()));
                 Punkt P2 = new Punkt(Math.max(R1[0].getX(), R1[1].getX()), Math.max(R1[0].getY(), R1[1].getY()));
                 Punkt P3 = new Punkt(Math.min(R2[0].getX(), R2[1].getX()), Math.min(R2[0].getY(), R2[1].getY()));
@@ -93,7 +101,7 @@ public class Rechteck
         }
         if (Pos.isInRect(R)) return true;
         return false;
-        /*Punkt P1 = new Punkt(Pos.getX() + breite, Pos.getY());
+        Punkt P1 = new Punkt(Pos.getX() + breite, Pos.getY());
         Punkt P2 = new Punkt(Pos.getX() , Pos.getY() + hoehe);
         Punkt P3 = new Punkt(Pos.getX() + breite, Pos.getY() + hoehe);
         return (Pos.isInRect(R) || P1.isInRect(R) || P2.isInRect(R) || P3.isInRect(R));
