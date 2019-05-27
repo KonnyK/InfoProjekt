@@ -14,22 +14,22 @@ public class Leinwand
     private int breite;
     private int hoehe;    
     JFrame fenster = new JFrame();
-    Color hintergrundfrabe = Color.BLACK;
+    Color hintergrundfarbe = Color.BLACK;
     Zeichenflaeche Canvas = new Zeichenflaeche();
     
-    public Leinwand(int breite, int hoehe, Color hintergrundfarbe)
+    public Leinwand(int breite, int hoehe, ArrayList<Rechteck> Hindernisse)
     {
         this.breite = breite;
         this.hoehe = hoehe;
-        hintergrundfarbe = hintergrundfarbe;
+        Color hintergrundfarbe = Color.blue;
+        this.hintergrundfarbe = hintergrundfarbe;
+        
+        Canvas.ZuZeichnen = Hindernisse;
+        
         fenster.setSize(breite, hoehe);
         fenster.setBackground(hintergrundfarbe);
-        fenster.enable();
+        fenster.add(Canvas);
+        fenster.setVisible(true);
     };
     
-    public void Zeichnen(ArrayList<Rechteck> Hindernisse)
-    {
-        Canvas.ZuZeichnen = Hindernisse;
-        fenster.setVisible(true);
-    }
 }

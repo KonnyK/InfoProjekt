@@ -11,6 +11,7 @@ import javax.swing.*;
 
 public class Zeichenflaeche extends JPanel
 {
+    
     public ArrayList<Rechteck> ZuZeichnen = new ArrayList<Rechteck>();
     
     @Override
@@ -20,7 +21,12 @@ public class Zeichenflaeche extends JPanel
         for (Rechteck R : ZuZeichnen)
         {
             g.setColor(R.getFarbe());
-            g.drawRect(R.getPos().getX(), R.getPos().getY(), R.getBreite(), R.getHoehe());
+            g.fillRect(R.getPos().getX(), R.getPos().getY(), R.getBreite(), R.getHoehe());
+        }
+        g.setColor(Color.black);
+        for (Rechteck R : ZuZeichnen)
+        {
+            g.drawString(Integer.toString(ZuZeichnen.indexOf(R)), R.Pos.getX(), R.Pos.getY());
         }
     }
     
