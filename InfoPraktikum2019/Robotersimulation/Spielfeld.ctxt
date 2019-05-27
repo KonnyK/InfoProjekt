@@ -19,3 +19,6 @@ comment8.target=void\ zeichnen(java.util.ArrayList)
 comment9.params=
 comment9.target=void\ hindernisseErzeugen()
 numComments=10
+comment10.params=
+comment10.target=void\ main()
+numComments=11

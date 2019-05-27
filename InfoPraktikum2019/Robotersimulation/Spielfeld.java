@@ -25,6 +25,28 @@ public class Spielfeld
     
     private Color RCol(){ return new Color(RGen.nextFloat(), RGen.nextFloat(), RGen.nextFloat()); }
         
+    public void main()
+    {
+        Roboter Robbi = new Roboter();
+        while (true) 
+        {
+            System.out.println("-----------------------------------");
+            System.out.println("Willkommen bei der Roboterhotline Robo drive 'n talk.");
+            System.out.println("Für eine Navigation entlang der Points of Interest wählen sie die 1");
+            System.out.println("Wollen sie die Hindernisse umfahren, wählen sie die 2.");
+            System.out.println("Wenn sie eine Frage haben, wählen sie die 3.");
+            System.out.println("Wenn sie kein Bock mehr haben drücken sie die 4 und verpissen sie sich!!!!");
+            int Nr = getAnzahlEingabe("");
+            switch(Nr)
+            {
+                 //case 1: HindernisseAbfahren(); break;
+                 //case 2: HindernisseUmfahren(); break;
+                 case 3: Robbi.Spracherkennung(); break;
+                 case 4: return;
+            }
+        }      
+    }
+    
     private int getAnzahlEingabe(String Message)
     {
         Scanner Scan = new Scanner(System.in);
