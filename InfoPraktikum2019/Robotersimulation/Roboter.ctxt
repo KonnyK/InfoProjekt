@@ -1,5 +1,7 @@
 #BlueJ class context
 comment0.target=Roboter
 comment1.params=
-comment1.target=void\ Spracherkennung()
-numComments=2
+comment1.target=Roboter()
+comment2.params=
+comment2.target=void\ Spracherkennung()
+numComments=3

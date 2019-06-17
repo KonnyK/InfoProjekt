@@ -29,7 +29,7 @@ public class Zeichenflaeche extends JPanel
                 Rechteck R = (Rechteck) F;
                 g.fillRect(R.getPos().getX(), R.getPos().getY(), R.getBreite(), R.getHoehe());
             }
-            if (F.getClass() == new Kreis().getClass()) 
+            if (F.getClass() == new Kreis().getClass() || F.getClass() == new Roboter().getClass()) 
             {
                 Kreis K = (Kreis) F;
                 g.fillArc(K.getPos().getX()+K.getRadius(), K.getPos().getY()+K.getRadius(), K.getRadius(), K.getRadius(), 0, 360);

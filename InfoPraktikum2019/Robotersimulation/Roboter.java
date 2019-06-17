@@ -10,6 +10,13 @@ import java.lang.*;
 
 public class Roboter extends Kreis
 {
+    public Roboter()
+    {
+        setPos(new Punkt());
+        setRadius(50);
+        setFarbe(java.awt.Color.yellow);
+    }
+    
     private enum Stichwort
     {
         Name("Mein Name geht dich gar nichts an!"),

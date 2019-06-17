@@ -33,7 +33,6 @@ public class Leinwand
         Canvas.ZuZeichnen.clear();
         for (Figur F : hindernisse)
         {
-            wait(1);
             Canvas.ZuZeichnen.add(F);
         }
     }
@@ -41,10 +40,16 @@ public class Leinwand
     public void zeichne(Figur F)
     {
         fenster.setVisible(true);
-        if (!Canvas.ZuZeichnen.contains(F)) Canvas.ZuZeichnen.add(F);    
+        Canvas.ZuZeichnen.add(F); 
     }
     
-    private void wait(int millisekunden)
+    public void Erneuern()
+    {
+        Canvas.revalidate();
+        Canvas.repaint();
+    }
+    
+    public void warte(int millisekunden)
     {
         try
         {  

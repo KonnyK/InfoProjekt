@@ -173,7 +173,9 @@ public class Spielfeld
     
     private void zeichnen(ArrayList<Rechteck> Hindis)
     {
-        leinwand.zeichne(Hindis);
+        ArrayList<Figur> Hindos = new ArrayList<Figur>();
+        for (Rechteck R : Hindis) Hindos.add(new Rechteck(R.getPos(), R.getBreite(), R.getHoehe(), R.getName(), R.getFarbe()));
+        leinwand.zeichne(Hindos);
     }
     
     public void hindernisseErzeugen()
@@ -183,7 +185,8 @@ public class Spielfeld
         int Anzahl = getAnzahlEingabe("Wieviele Hindernisse soll es geben?");
         for (int i = 0; i < Anzahl; i++)
         {
-            while (true)
+            boolean Finished = false;
+            while (!Finished)
             {
                 Punkt P1 = new Punkt(RNum(0, breite), RNum(0,hoehe));
                 Punkt P2 = new Punkt(RNum(0, breite), RNum(0,hoehe));
@@ -192,10 +195,16 @@ public class Spielfeld
                 Rechteck Neu = new Rechteck(Pos, Maße.getX(), Maße.getY(), "Rechteck " + i, RCol());
                 boolean Overlap = false;
                 for (Rechteck R : Hindernisse) if (Neu.ueberlappt(R)) Overlap = true;
-                if (!Overlap)
+                if (Maße.getX() != 0 && Maße.getY() != 0)
                 {
-                    Hindernisse.add(Neu);
-                    break;
+                    float SV = Maße.getX()/Maße.getY(); //Seitenverhältnis
+                    int A = Maße.getX() * Maße.getY(); //Fläche
+                    if (!Overlap && SV <= 2 && SV >= 0.5f && A <= 10000 && A >= 800)
+                    {
+                        System.out.println(i);
+                        Hindernisse.add(Neu);
+                        Finished = true;
+                    }
                 }
             }            
         }
@@ -209,5 +218,57 @@ public class Spielfeld
         }
         System.out.println("Insgesamt " + (double) Area/10000 + "% Flächennutzung");
         zeichnen(Hindernisse);
+    }
+    
+    public void hindernisse_umfahren()
+    {
+        hindernisseErzeugen();
+        Roboter Rob = new Roboter();
+        leinwand.zeichne(Rob);
+        int Überlauf = 0;
+        while (Überlauf<2000 && (Rob.getPos().getX() < 1000-2*Rob.getRadius() || Rob.getPos().getY() < 1000-2*Rob.getRadius()))
+        {
+            Überlauf++;
+            System.out.println(Überlauf);
+            Punkt nextPos = new Punkt(Rob.getPos().getX() + 1, Rob.getPos().getY() + 1);
+            Rob.setPos(nextPos);
+            int Korrekturen = 0;
+            for (Rechteck Rect:Hindernisse)
+            {
+                if (Rob.ueberlappt(Rect))
+                {
+                    int LastKorrekturen = Korrekturen;
+                    if (Rob.getPos().getX() <= Rect.getPos().getX())
+                    {
+                        Rob.setPos(new Punkt(Rob.getPos().getX() - 1, Rob.getPos().getY()));
+                        Korrekturen++;
+                    }
+                    if (Rob.getPos().getY() <= Rect.getPos().getY())
+                    {
+                        Rob.setPos(new Punkt(Rob.getPos().getX(), Rob.getPos().getY() - 1));
+                        Korrekturen++;
+                    }
+                    if (LastKorrekturen-Korrekturen > 1) 
+                    {
+                        Rob.setPos(new Punkt(Rob.getPos().getX(), Rob.getPos().getY() -1));
+                        Korrekturen--;
+                    }
+                }
+            }
+            if (Rob.getPos().getX() > 1000-2*Rob.getRadius())
+            {
+                Rob.setPos(new Punkt(Rob.getPos().getX() - 1, Rob.getPos().getY()));
+                Korrekturen++;
+            }
+            if (Rob.getPos().getY() > 1000-2*Rob.getRadius())
+            {
+                Rob.setPos(new Punkt(Rob.getPos().getX(), Rob.getPos().getY() - 1));
+                Korrekturen++;
+            }
+            if (Korrekturen > 1) return;
+            leinwand.Erneuern();
+            //leinwand.warte(100);
+        }
+        
     }
 }
