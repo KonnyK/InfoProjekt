@@ -11,13 +11,15 @@ import javax.swing.*;
 
 public class Leinwand
 {
+    private static Leinwand Lsingleton = new Leinwand(1000, 1000, Color.pink);
+    public static Leinwand gibLeinwand() { return Lsingleton; }
     private int breite;
     private int hoehe;    
     JFrame fenster = new JFrame();
     Color hintergrundfarbe = Color.BLACK;
     Zeichenflaeche Canvas = new Zeichenflaeche();
     
-    public Leinwand(int breite, int hoehe, Color hintergrundfarbe)
+    private Leinwand(int breite, int hoehe, Color hintergrundfarbe)
     {
         this.breite = breite;
         this.hoehe = hoehe;

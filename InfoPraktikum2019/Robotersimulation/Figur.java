@@ -32,4 +32,9 @@ public abstract class Figur
     public abstract int minY();
     public abstract int maxY();
     
+    public void ZeichneFigur()
+    {
+        Leinwand.gibLeinwand().zeichne(this);
+    }
+    
 }

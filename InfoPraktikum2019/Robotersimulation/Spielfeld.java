@@ -9,15 +9,15 @@ import java.awt.Color;
 
 public class Spielfeld
 {
-    final int breite = 1000;
     final int hoehe = 1000;
+    final int breite = 1000;
     Random RGen = new Random();
     ArrayList<Rechteck> Hindernisse = new ArrayList<Rechteck>();
     Leinwand leinwand;
     
     public Spielfeld()
     {
-        leinwand = new Leinwand(breite, hoehe, Color.pink);
+        leinwand = Leinwand.gibLeinwand();
     }
     
     private int RNum(int von, int bis){ return (RGen.nextInt(bis-von) + von); }
@@ -181,6 +181,7 @@ public class Spielfeld
     public void poi_abfahren()
     {
         leinwand.LeereZeichenfläche();
+        leinwand.ZeichneLinie(false);        
         int Speed = 5;
         ArrayList<Punkt> Punkte = PunktEingabe();
         Roboter Rob = new Roboter();
@@ -237,7 +238,7 @@ public class Spielfeld
                 {
                     float SV = Maße.getX()/Maße.getY(); //Seitenverhältnis
                     int A = Maße.getX() * Maße.getY(); //Fläche
-                    if (!Overlap && SV <= 2 && SV >= 0.5f && A <= 10000 && A >= 800)
+                    if (!Overlap && SV <= 2 && SV >= 0.5f && A <= 10000 && A >= 800 && Neu.Pos.gibAbstand(new Punkt()) > 50)
                     {
                         System.out.println(i);
                         Hindernisse.add(Neu);
