@@ -23,6 +23,18 @@ public class Kreis extends Figur
     public int maxY(){return getPos().getY() + radius;}
     
     public Kreis(){}
+    public Kreis(Punkt Pos, int Radius, Color Farbe)
+    {
+        this.setPos(Pos);
+        this.setFarbe(Farbe);
+        this.setRadius(Radius);
+    }
+    public Kreis(Kreis K)
+    {
+        this.setFarbe(K.getFarbe());
+        this.setPos(K.getPos());
+        this.setRadius(K.getRadius());
+    }
     
     @Override
     public boolean ueberlappt(Rechteck R)

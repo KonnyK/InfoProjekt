@@ -11,7 +11,6 @@ public class Spielfeld
 {
     final int breite = 1000;
     final int hoehe = 1000;
-    ArrayList<Punkt> Punkte = new ArrayList<Punkt>();
     Random RGen = new Random();
     ArrayList<Rechteck> Hindernisse = new ArrayList<Rechteck>();
     Leinwand leinwand;
@@ -39,8 +38,8 @@ public class Spielfeld
             int Nr = getAnzahlEingabe("");
             switch(Nr)
             {
-                 //case 1: HindernisseAbfahren(); break;
-                 //case 2: HindernisseUmfahren(); break;
+                 case 1: poi_abfahren(); break;
+                 case 2: hindernisse_umfahren(); break;
                  case 3: Robbi.Spracherkennung(); break;
                  case 4: return;
             }
@@ -62,7 +61,7 @@ public class Spielfeld
             {
                 Anzahl = Integer.valueOf(Eingabe);
                 if (Anzahl < 0) System.out.println("Bitte geben Sie eine Zahl größer null ein.");
-                EingabeKorrekt = (Anzahl > 0);
+                EingabeKorrekt = (Anzahl >= 0);
                 break;
             }
             catch (Exception E)
@@ -86,12 +85,19 @@ public class Spielfeld
 
     public ArrayList<Punkt> PunktEingabe()
     {
+        ArrayList<Punkt> Punkte = new ArrayList<Punkt>();
         Scanner Scan = new Scanner(System.in);
         int Anzahl = getAnzahlEingabe("Wieviele Punkte sollen abgefahren werden?");
         boolean PunktErkannt = false;
         Punkte.clear();
         
-        if (Anzahl == 0) return Punkte;
+        if (Anzahl == 0) 
+        {
+            Punkte.add(new Punkt());
+            for (int i = 0; i < 10; i++) Punkte.add(new Punkt(RNum(100, 900), RNum(100, 900)));
+            poiSortieren(Punkte);
+            return Punkte;
+        }
         
         System.out.println("Erstelle " + Anzahl + " Punkte...");
         Punkte.add(new Punkt());
@@ -123,6 +129,7 @@ public class Spielfeld
                 }                    
             }
         }
+        poiSortieren(Punkte);
         return Punkte;
     }
     
@@ -170,6 +177,37 @@ public class Spielfeld
             }  
         } */
     }
+    
+    public void poi_abfahren()
+    {
+        leinwand.LeereZeichenfläche();
+        int Speed = 5;
+        ArrayList<Punkt> Punkte = PunktEingabe();
+        Roboter Rob = new Roboter();
+        leinwand.zeichne(Rob);
+        for (Punkt P:Punkte) leinwand.zeichne(new Kreis(P, 5, Color.red));
+        while (Punkte.size() > 1)
+        {
+            Punkt P = Punkte.get(1);
+            Punkt MittelPunkt = new Punkt(Rob.getPos().getX() + Rob.getRadius(), Rob.getPos().getY() + Rob.getRadius());
+            while (MittelPunkt.gibAbstand(P) > Speed)
+            {
+                double dx = P.getX() - MittelPunkt.getX();
+                double dy = P.getY() - MittelPunkt.getY();
+                double Betrag = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+                dx /= Betrag/Speed;
+                dy /= Betrag/Speed;
+                Rob.setPos(new Punkt(Rob.getPos().getX() + Math.round((float)dx), Rob.getPos().getY() + Math.round((float)dy)));
+                MittelPunkt = new Punkt(Rob.getPos().getX() + Rob.getRadius(), Rob.getPos().getY() + Rob.getRadius());
+                leinwand.Erneuern();
+                leinwand.warte(50);
+            }
+            Punkte.get(0).setX(P.getX());
+            Punkte.get(0).setY(P.getY());         
+            Punkte.remove(P);
+            poiSortieren(Punkte);
+        }
+    }    
     
     private void zeichnen(ArrayList<Rechteck> Hindis)
     {
@@ -222,6 +260,8 @@ public class Spielfeld
     
     public void hindernisse_umfahren()
     {
+        leinwand.LeereZeichenfläche();
+        leinwand.ZeichneLinie(true);
         hindernisseErzeugen();
         Roboter Rob = new Roboter();
         leinwand.zeichne(Rob);
@@ -229,46 +269,45 @@ public class Spielfeld
         while (Überlauf<2000 && (Rob.getPos().getX() < 1000-2*Rob.getRadius() || Rob.getPos().getY() < 1000-2*Rob.getRadius()))
         {
             Überlauf++;
-            System.out.println(Überlauf);
             Punkt nextPos = new Punkt(Rob.getPos().getX() + 1, Rob.getPos().getY() + 1);
-            Rob.setPos(nextPos);
+            
+            Kreis K = new Kreis(Rob);
+            K.setPos(nextPos);
             int Korrekturen = 0;
             for (Rechteck Rect:Hindernisse)
             {
-                if (Rob.ueberlappt(Rect))
+                if (K.ueberlappt(Rect))
                 {
                     int LastKorrekturen = Korrekturen;
-                    if (Rob.getPos().getX() <= Rect.getPos().getX())
+                    int dx = Rect.getPos().getX() - K.getPos().getX();
+                    int dy = Rect.getPos().getY() - K.getPos().getY();
+                    if (dy <= dx)
                     {
-                        Rob.setPos(new Punkt(Rob.getPos().getX() - 1, Rob.getPos().getY()));
+                        K.setPos(new Punkt(K.getPos().getX() - 1, K.getPos().getY()));
                         Korrekturen++;
                     }
-                    if (Rob.getPos().getY() <= Rect.getPos().getY())
+                    if (dx < dy)
                     {
-                        Rob.setPos(new Punkt(Rob.getPos().getX(), Rob.getPos().getY() - 1));
+                        K.setPos(new Punkt(K.getPos().getX(), K.getPos().getY() - 1));
                         Korrekturen++;
-                    }
-                    if (LastKorrekturen-Korrekturen > 1) 
-                    {
-                        Rob.setPos(new Punkt(Rob.getPos().getX(), Rob.getPos().getY() -1));
-                        Korrekturen--;
                     }
                 }
             }
-            if (Rob.getPos().getX() > 1000-2*Rob.getRadius())
+            if (K.getPos().getX() > 1000-2*K.getRadius())
             {
-                Rob.setPos(new Punkt(Rob.getPos().getX() - 1, Rob.getPos().getY()));
+                K.setPos(new Punkt(K.getPos().getX() - 1, K.getPos().getY()));
                 Korrekturen++;
             }
-            if (Rob.getPos().getY() > 1000-2*Rob.getRadius())
+            if (K.getPos().getY() > 1000-2*K.getRadius())
             {
-                Rob.setPos(new Punkt(Rob.getPos().getX(), Rob.getPos().getY() - 1));
+                K.setPos(new Punkt(K.getPos().getX(), K.getPos().getY() - 1));
                 Korrekturen++;
             }
+            Rob.setPos(K.getPos());
             if (Korrekturen > 1) return;
             leinwand.Erneuern();
-            //leinwand.warte(100);
+            leinwand.warte(10);
         }
-        
+        leinwand.ZeichneLinie(false);
     }
 }

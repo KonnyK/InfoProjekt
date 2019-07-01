@@ -13,7 +13,7 @@ public class Roboter extends Kreis
     public Roboter()
     {
         setPos(new Punkt());
-        setRadius(50);
+        setRadius(15);
         setFarbe(java.awt.Color.yellow);
     }
     

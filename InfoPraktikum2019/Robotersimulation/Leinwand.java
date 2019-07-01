@@ -30,7 +30,7 @@ public class Leinwand
     public void zeichne(ArrayList<Figur> hindernisse)
     {
         fenster.setVisible(true);
-        Canvas.ZuZeichnen.clear();
+        Canvas.Clear();
         for (Figur F : hindernisse)
         {
             Canvas.ZuZeichnen.add(F);
@@ -42,6 +42,13 @@ public class Leinwand
         fenster.setVisible(true);
         Canvas.ZuZeichnen.add(F); 
     }
+    
+    public void ZeichneLinie(boolean value)
+    {
+        Canvas.ZeichneLinie = value;
+    }
+    
+    public void LeereZeichenfläche(){ Canvas.Clear(); }
     
     public void Erneuern()
     {
