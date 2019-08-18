@@ -60,7 +60,7 @@ public class Spielfeld
             try
             {
                 Anzahl = Integer.valueOf(Eingabe);
-                if (Anzahl < 0) System.out.println("Bitte geben Sie eine Zahl größer null ein.");
+                if (Anzahl < 0) System.out.println("Bitte geben Sie eine Zahl größer als null ein.");
                 EingabeKorrekt = (Anzahl >= 0);
                 break;
             }
@@ -121,7 +121,7 @@ public class Spielfeld
                     {
                         Punkte.add(new Punkt(x,y));
                         PunktErkannt = true;
-                    } else System.out.println("Punkt liegt nicht im Spielfeld(X:0..."+breite+" Y:=..."+hoehe);
+                    } else System.out.println("Punkt liegt nicht im Spielfeld(0 ≤ X ≤ "+breite+", 0 ≤ Y ≤ "+hoehe);
                 }
                 catch (Exception E)
                 { 
@@ -146,36 +146,8 @@ public class Spielfeld
                 return Math.toIntExact(Abstand1-Abstand2);
             }
         });
-        System.out.println("Sortiere Punkte...");
-        double Gesamtweg = 0;
-        for (int i = 1; i < POI.size(); i++)
-        {
-            double Abstand = POI.get(i-1).gibAbstand(POI.get(i)); 
-            Gesamtweg += Abstand;
-            String P1 = "Punkt" + (i-1) + "(" + POI.get(i-1).getX() + "|" + POI.get(i-1).getY() + ")";
-            String P2 = "Punkt" + i + "(" + POI.get(i-1).getX() + "|" + POI.get(i-1).getY() + ")";
-            System.out.println(i + ".Teilstrecke: " + P1 + " --> " + P2 + " : " + (double)Math.round(100*Abstand)/100 + "px");
-        }
-        System.out.println("Gesamte Strecke: " + (double)Math.round(100*Gesamtweg)/100 + "px");
+        System.out.println("Suche nächsten Punkt...");
         
-        /*
-        boolean InOrdnung = false;
-        while (!InOrdnung)
-        {
-            InOrdnung = true;
-            for (int i = 1; i < Punkte.size(); i++)
-            { 
-                if (Punkte.get(i).gibAbstand(Punkte.get(0)) < Punkte.get(i-1).gibAbstand(Punkte.get(0)))
-                {
-                    Punkt Zwischenablage = new Punkt(Punkte.get(i).getX(), Punkte.get(i).getY());
-                    Punkte.get(i).setX(Punkte.get(i-1).getX());
-                    Punkte.get(i).setY(Punkte.get(i-1).getY());
-                    Punkte.get(i-1).setX(Zwischenablage.getX());
-                    Punkte.get(i-1).setY(Zwischenablage.getY());
-                    InOrdnung = false;
-                }
-            }  
-        } */
     }
     
     public void poi_abfahren()
@@ -252,7 +224,6 @@ public class Spielfeld
         {
             Rechteck R = Hindernisse.get(i);
             int SubArea = R.getBreite() * R.getHoehe();
-            System.out.println("Rechteck" + i + ": " + (double) SubArea/10000 + "% Fläche");
             Area += SubArea;
         }
         System.out.println("Insgesamt " + (double) Area/10000 + "% Flächennutzung");

@@ -45,10 +45,6 @@ public class Zeichenflaeche extends JPanel
         }
         if (Linie.size() > 1 && ZeichneLinie) for (int i = 1; i < Linie.size() - 1; i++) g.drawLine(Linie.get(i-1).getX(), Linie.get(i-1).getY(), Linie.get(i).getX(), Linie.get(i).getY());
         g.setColor(Color.black);
-        for (Figur R : ZuZeichnen)
-        {
-            if (R.getClass() == new Rechteck().getClass()) g.drawString(Integer.toString(ZuZeichnen.indexOf(R)), R.getPos().getX(), R.getPos().getY());
-        }
     }
     
 }

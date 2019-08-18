@@ -25,7 +25,9 @@ public class Leinwand
         this.hoehe = hoehe;
         this.hintergrundfarbe = hintergrundfarbe;
         fenster.setContentPane(Canvas);
-        fenster.setSize(breite, hoehe);
+        fenster.setTitle("Robotersimulation");
+        fenster.setPreferredSize(new Dimension(breite+16, hoehe+39));
+        fenster.pack();
         Canvas.Hintergrund = new Rechteck(new Punkt(), breite, hoehe, "", hintergrundfarbe);    
     };
     
